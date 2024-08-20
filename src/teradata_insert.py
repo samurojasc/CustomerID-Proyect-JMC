@@ -3,7 +3,7 @@ from teradataml import TeradataMlException
 from teradataml.dataframe.copy_to import copy_to_sql
 
 
-def insert_query(schema, table, primary_index, df):
+def insert_query(schema, table, df):
     """
     Inserta datos desde un archivo Excel en una tabla de Teradata Vantage utilizando la función `copy_to_sql`.
 
@@ -27,10 +27,10 @@ def insert_query(schema, table, primary_index, df):
         # - `table_name`: Nombre de la tabla en Teradata.
         # - `primary_index`: Índice primario para la tabla en Teradata.
         # - `if_exists="replace"`: Reemplaza la tabla en Teradata si ya existe.
-        copy_to_sql(df=df, schema_name=schema, table_name=table, primary_index=primary_index, if_exists="replace")
+        copy_to_sql(df=df, schema_name=schema, table_name=table)
 
         # Imprimir un mensaje de éxito si la inserción se realiza correctamente.
-        print(f'Inserción hecha correctamente en {schema}.{table}.')
+        print(f'Inserción hecha correctamente de {df.shape[0]} en {schema}.{table}.')
 
     except TeradataMlException as e:
         # Manejar cualquier excepción específica de `teradataml` e imprimir un mensaje de error.
