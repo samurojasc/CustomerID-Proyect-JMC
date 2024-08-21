@@ -47,4 +47,8 @@ def close_connection():
     Esta función utiliza la función `remove_context` de `teradataml` para cerrar la conexión
     con Teradata Vantage cuando ya no sea necesaria.
     """
-    remove_context()
+    try:
+        remove_context()
+        print('Conexión cerrada correctamente.')
+    except TeradataMlException as e:
+        print(f'Error en teradataml: {str(e)}')
